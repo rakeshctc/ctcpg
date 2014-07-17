@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <link href="flat-ui.css" rel="stylesheet">
+    <link href="demo.css" rel="stylesheet">
+    <script type="text/javascript">
+  $(document).ready(function () {
+    $.ajax({
+        type: "GET",
+        url: "21kms.csv",
+        dataType: "text",
+        success: function(data){
+            data = processData(data);
+        }     
+       });
+   });
+
+ var data = []; 
+ var lines = [];
+ var tempArray = [];
+ var output;
+ var searchValue; 
+
+function processData(allText) {
+    var allTextLines = allText.split(/\r\n|\n/);
+    var headers = allTextLines[0].split(',');
+    for (var i=1; i<allTextLines.length; i++) {
+        var data = allTextLines[i].split(',');
+        if (data.length == headers.length) {
+            var tarr = [];
+            for (var j=0; j<headers.length; j++) {
+                tarr.push(data[j]);
+            }
+            lines.push(tarr);
+        }
+    } 
+}
+
+
+
+function formSubmit() {
+         var value = document.getElementById('bib').value;
+         value = value.toUpperCase();
+         searchData(lines, value);
+          function searchData(data, search) { 
+              for(i=0; i<600; i++) {
+                  var pos = $.inArray(search, data[i]);
+                  if(pos !== -1) { tempArray.push(data[i]); }
+              }
+              return tempArray[0][0];
+             
+          }  
+
+       var c = document.getElementById('canvas');
+        var context = c.getContext('2d');
+        var backgroundImage = new Image();
+
+        backgroundImage.onload = function() {
+            DrawScreen();
+            DrawText();
+        };
+
+        backgroundImage.src = "21kms.png";
+
+        function DrawScreen() {
+           context.drawImage(backgroundImage, 0, 0);
+        }
+        
+        function DrawText() {
+           context.fillStyle = "black";
+           context.font = "28px sans-serif";
+           context.textBaseline = 'top';
+           var name = tempArray[0][0].toLowerCase();
+           name = name.capitalize();
+           context.fillText(name, 40, 210);
+           context.fillText(tempArray[0][3]+" Hours", 380, 210);
+        }
+      
+        var canvasTag = document.getElementById("canvas");
+        var data = canvas.toDataURL("image/png");
+        canvasTag.innerHTML = data;
+        canvasTag.style.display="block";
+
+        String.prototype.capitalize = function() {
+          return this.charAt(0).toUpperCase() + this.slice(1);
+        }
+ }
+
+    </script>
+   
+</head>
+<body>
+   <center>
+      <h1 class="demo-section-title">Half Marathon Certificate</h1>
+      <h6>To Save: Right Click -> Save image as</h6>
+            <p>Supported only in Chrome and Mozilla Firefox browsers</p>
+      <p><input type="text" value="" placeholder="Your BIB" id="bib" class="form-control" /></p>
+      <p><input type="button" onclick="formSubmit()" value="Submit" class="btn btn-block btn-lg btn-danger" /></p>
+      <canvas id="canvas" width="750" height="530" style="display:none;"></canvas>
+    </center>
+</body>
+</html>

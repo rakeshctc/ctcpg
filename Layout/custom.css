@@ -1,0 +1,17 @@
+body {
+  padding-top: 50px;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+.main-title {
+	text-align: center;;
+}
+
+.browser-note {
+padding: 1em;
+text-align: center;
+margin-top: 4em;
+}
