@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -20,9 +21,9 @@ namespace CTC_Final.Certificates.Test
         {
             DataTable dt = new DataTable();
             DataTable dtNew = new DataTable();
-            using (SqlConnection con = new SqlConnection("Data Source=184.168.194.70;Initial Catalog=ittitudeworks; User ID=rakesh123; Password=Rakesh@123; Trusted_Connection=False"))
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
             {
-                using (SqlCommand cmd = new SqlCommand("select * from all_triathlon_timing where BIBNumber='" + txt123Bib.Text.Trim() + "'", con))
+                using (SqlCommand cmd = new SqlCommand("select * from all_triathlon_timing", con))
                 {
                     con.Open();
                     SqlDataAdapter da = new SqlDataAdapter(cmd);

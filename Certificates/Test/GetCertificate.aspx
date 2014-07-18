@@ -6,15 +6,15 @@
 <head runat="server">
     <title>Chennai Triathlon e-Certificate</title>
 
-    <meta property='og:title' content='Chennai Triathlon' />
+   <%-- <meta property='og:title' content='Chennai Triathlon' />
 
-    <meta property='og:type' content='article' />
+    <meta property='og:type' content='article' />--%>
 
-    <meta property='og:image' content='http://www.chennaitrekkingclubevents.org/Certificates/test/GetCertificate.aspx?abc=B7394F0C-828D-41D5-9E1C-EF50A1C67F83' />
+    <%--<meta property='og:image' content='http://www.chennaitrekkingclubevents.org/Certificates/test/GetCertificate.aspx?abc=B7394F0C-828D-41D5-9E1C-EF50A1C67F83' />--%>
 
-    <meta property='og:url' content='http://www.chennaitrekkers.org' />
+   <%-- <meta property='og:url' content='http://www.chennaitrekkingclubevents.org' />
 
-    <meta property='og:description' content='Chennai Triathlon' />
+    <meta property='og:description' content='Chennai Triathlon' />--%>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
@@ -54,12 +54,12 @@
                 context.font = "25px sans-serif";
                 context.textBaseline = 'top';
 
-                var total = document.getElementById("<%= hfTotal.ClientID %>").value;
-                var name = document.getElementById("<%= hfName.ClientID %>").value;
-                var swim = document.getElementById("<%= hfSwim.ClientID %>").value;
-                var cycle = document.getElementById("<%= hfCycle.ClientID %>").value;
-                var run = document.getElementById("<%= hfRun.ClientID %>").value;
-                var category = document.getElementById("<%= hfCategory.ClientID %>").value;
+                var total = document.getElementById('hfTotal').value;
+                var name = document.getElementById('hfName').value;
+                var swim = document.getElementById('hfSwim').value;
+                var cycle = document.getElementById('hfCycle').value;
+                var run = document.getElementById('hfRun').value;
+                var category = document.getElementById('hfCategory').value;
 
                 //Name
 
@@ -79,20 +79,19 @@
                 context.fillText("in " + total + " Hrs ", 450, 500);
                 //Category
                 context.fillText("under " + category + " category ", 210, 500);
-                var canvasTag = document.getElementById("canvas");
-                var data = canvasTag.toDataURL("image/png");
-                canvasTag.style.display = "block";
 
-                document.getElementById('download').style.display = "inline-block";
 
-                downloadCanvas(this, 'canvas', 'ChennaiTrailMarathon.png');
             }
 
-           
+            var canvasTag = document.getElementById("canvas");
+            var data = canvasTag.toDataURL("image/png");
+            canvasTag.style.display = "block";
+
+            document.getElementById('download').style.display = "inline-block";
 
 
             document.getElementById('download').addEventListener('click', function () {
-                
+                downloadCanvas(this, 'canvas', document.getElementById('hfBib').value + '.png');
 
             }, false);
 
@@ -109,6 +108,7 @@
 <body onload="formSubmit();">
     <form id="form1" runat="server">
         <div>
+            <asp:HiddenField ID="hfBib" runat="server" />
             <asp:HiddenField ID="hfName" runat="server" />
             <asp:HiddenField ID="hfSwim" runat="server" />
             <asp:HiddenField ID="hfCycle" runat="server" />

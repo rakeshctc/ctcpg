@@ -328,6 +328,11 @@
     <Content Include="Certificates\Test\GetBIB.aspx" />
     <Content Include="Certificates\Test\GetCertificate.aspx" />
     <Content Include="Certificates\Test\Images\accent.png" />
+    <Content Include="Certificates\Test\Images\AllImages\C0111.png" />
+    <Content Include="Certificates\Test\Images\AllImages\N0100.png" />
+    <Content Include="Certificates\Test\Images\AllImages\P0212.png" />
+    <Content Include="Certificates\Test\Images\AllImages\P0234.png" />
+    <Content Include="Certificates\Test\Images\AllImages\R0121.png" />
     <Content Include="Certificates\Test\Images\bullet.png" />
     <Content Include="Certificates\Test\Images\heroAccent.png" />
     <Content Include="Certificates\Test\Images\orderedList0.png" />
